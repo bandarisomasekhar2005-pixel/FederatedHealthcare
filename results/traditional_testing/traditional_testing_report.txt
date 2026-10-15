@@ -1,0 +1,97 @@
+=====================================================================================
+TRADITIONAL MACHINE LEARNING 80:20 TRAIN/TEST EVALUATION REPORT
+PROJECT: Privacy-Preserving Federated Learning for Healthcare
+=====================================================================================
+
+1. DATASET USED:
+   UCI Machine Learning Repository — Heart Disease (Cleveland Clinic Foundation)
+   Real clinical cardiovascular records. Zero synthetic or fabricated data.
+
+2. TOTAL SAMPLES:
+   303 patient records.
+
+3. NUMBER OF FEATURES:
+   Original clinical attributes : 13
+   Preprocessed encoded features: 22 input features + 1 binary target.
+
+4. 80:20 SPLITTING METHODOLOGY:
+   Stratified random splitting using train_test_split (random_state=42).
+   The split is performed directly on the raw data BEFORE feature transformation,
+   preserving the clinical diagnosis class proportions across both partitions.
+
+5. TRAINING SAMPLE COUNT:
+   242 samples (80.0% of total valid observations).
+   Class 0 (No HD): 131 (54.13%) | Class 1 (HD): 111 (45.87%)
+
+6. TESTING SAMPLE COUNT:
+   61 samples (20.0% of total valid observations).
+   Class 0 (No HD): 33 (54.10%) | Class 1 (HD): 28 (45.90%)
+
+7. MODEL ARCHITECTURE USED:
+   HeartDiseaseMLP (PyTorch Multi-Layer Perceptron):
+   - Input Layer  : 22 clinical features
+   - Hidden 1     : Linear(22, 32) -> LayerNorm(32) -> ReLU -> Dropout(0.2)
+   - Hidden 2     : Linear(32, 16) -> LayerNorm(16) -> ReLU -> Dropout(0.1)
+   - Output Layer : Linear(16, 1)  -> Sigmoid (risk probability)
+   Identical neural architecture to the Federated Learning model to isolate
+   the effect of centralized vs. decentralized learning.
+
+8. PREPROCESSING PERFORMED:
+   - Missing values in 'ca' and 'thal' imputed using median and mode fitted on Train only.
+   - Categorical features ('cp', 'restecg', 'slope', 'thal') one-hot encoded.
+   - Continuous numerical features standardized using StandardScaler fitted on Train only.
+
+9. DATA LEAKAGE PREVENTION:
+   - Verification check: TRAIN INTERSECT TEST = EMPTY (0 sample overlap).
+   - Imputers and scalers were fit strictly on the 80% training set.
+   - The 20% test set was kept completely unseen until the single final evaluation.
+
+10. ACCURACY:
+    0.8361 (83.61%)
+
+11. PRECISION:
+    0.7812 (78.12%) [Positive Class = 1]
+
+12. RECALL (SENSITIVITY):
+    0.8929 (89.29%)
+
+13. F1-SCORE:
+    0.8333 (83.33%)
+
+14. ROC-AUC:
+    0.9102
+
+15. CONFUSION MATRIX INTERPRETATION:
+    - True Negatives  (TN) = 26: Correctly identified healthy patients.
+    - False Positives (FP) = 7: Healthy patients incorrectly flagged with heart disease.
+    - False Negatives (FN) = 3: Heart disease patients missed (critical clinical metric).
+    - True Positives  (TP) = 25: Correctly diagnosed heart disease patients.
+
+16. COMPARISON WITH EXISTING FEDERATED LEARNING RESULTS:
+              Metric   Federated Learning (FedAvg)  Federated Learning (FedProx)      Privacy FL (FedAvg + DP) Traditional 80:20 Centralized
+            Accuracy                        74.19%                        74.19%                        79.03%                        83.61%
+ Precision (Class 1)                        71.43%                        68.75%                        74.19%                        78.12%
+Recall / Sensitivity                        71.43%                        78.57%                        82.14%                        89.29%
+            F1-Score                        0.7143                        0.7333                        0.7797                        0.8333
+             ROC-AUC                        0.8298                        0.8298                        0.8403                        0.9102
+          Loss (BCE)             0.1386 (Round 20)             0.1305 (Round 20)             0.2739 (Round 20)            0.4591 (Test Loss)
+       Data Location     Distributed (4 Hospitals)     Distributed (4 Hospitals)     Distributed (4 Hospitals)   Centralized Single Database
+   Privacy Guarantee Data Isolation (Weights Only) Data Isolation (Weights Only) Differential Privacy (eps~86)        None (Raw Data Pooled)
+
+   METHODOLOGICAL DIFFERENCES:
+   - Traditional Centralized 80:20: Assumes all patient data can be pooled into a single
+     central database, ignoring HIPAA/GDPR legal boundaries and hospital privacy constraints.
+   - Federated Learning: Simulates 4 independent hospitals with realistic Non-IID class
+     distributions (Dirichlet alpha=0.5). Models train locally behind hospital firewalls,
+     and only parameter updates are communicated to the central server.
+
+17. LIMITATIONS OF TRADITIONAL CENTRALIZED LEARNING:
+   - Regulatory & Legal Barriers: Direct pooling of patient electronic health records violates
+     patient privacy rights and healthcare compliance standards.
+   - Single Point of Failure: Central data lakes present lucrative targets for data breaches.
+
+18. WHY THE TRADITIONAL MODEL IS USED AS A BASELINE:
+   In scientific federated learning literature, the centralized 80:20 model serves as the
+   theoretical 'Upper Bound'. It demonstrates how close the privacy-preserving federated
+   models come to central pooling performance without compromising patient confidentiality.
+=====================================================================================

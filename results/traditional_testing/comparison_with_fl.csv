@@ -1,0 +1,9 @@
+Metric,Federated Learning (FedAvg),Federated Learning (FedProx),Privacy FL (FedAvg + DP),Traditional 80:20 Centralized
+Accuracy,74.19%,74.19%,79.03%,83.61%
+Precision (Class 1),71.43%,68.75%,74.19%,78.12%
+Recall / Sensitivity,71.43%,78.57%,82.14%,89.29%
+F1-Score,0.7143,0.7333,0.7797,0.8333
+ROC-AUC,0.8298,0.8298,0.8403,0.9102
+Loss (BCE),0.1386 (Round 20),0.1305 (Round 20),0.2739 (Round 20),0.4591 (Test Loss)
+Data Location,Distributed (4 Hospitals),Distributed (4 Hospitals),Distributed (4 Hospitals),Centralized Single Database
+Privacy Guarantee,Data Isolation (Weights Only),Data Isolation (Weights Only),Differential Privacy (eps~86),None (Raw Data Pooled)

@@ -1,0 +1,5 @@
+Paradigm,Model / Algorithm,Accuracy,F1-Score,ROC-AUC,Sensitivity (Recall),Specificity,Precision
+Federated,FedAvg,0.8361,0.8333,0.908,0.8929,0.7879,0.7812
+Federated,FedProx,0.8361,0.8276,0.9351,0.8571,0.8182,0.8
+Privacy FL,FedAvg + DP,0.8361,0.8333,0.9394,0.8929,0.7879,0.7812
+Privacy FL,FedProx + DP,0.8689,0.8621,0.9426,0.8929,0.8485,0.8333

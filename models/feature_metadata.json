@@ -1,0 +1,30 @@
+{
+  "feature_names": [
+    "age",
+    "sex",
+    "trestbps",
+    "chol",
+    "fbs",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "ca",
+    "cp_1",
+    "cp_2",
+    "cp_3",
+    "cp_4",
+    "restecg_0",
+    "restecg_1",
+    "restecg_2",
+    "slope_1",
+    "slope_2",
+    "slope_3",
+    "thal_3",
+    "thal_6",
+    "thal_7"
+  ],
+  "input_dim": 22,
+  "target": "target",
+  "trained_on": "global_train.csv",
+  "test_file": "global_test.csv"
+}

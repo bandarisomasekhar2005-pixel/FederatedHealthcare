@@ -1,0 +1,9 @@
+Evaluation Stage,Model / Method,Data Distribution,Train Samples,Test Samples,Accuracy (%),Precision (%),Recall / Sens (%),Specificity (%),F1-Score,ROC-AUC,"Confusion Matrix [TN,FP,FN,TP]",Privacy Protection
+Initial Baseline (Siloed),Hospital 1 Standalone,Non-IID (Hospital 1),86,62,74.19,70.0,75.0,73.53,0.7241,0.7889,"[25, 9, 7, 21]",Local Isolation Only
+Initial Baseline (Siloed),Hospital 2 Standalone,"Non-IID (Hospital 2, 76.5% HD)",40,62,67.74,59.09,92.86,47.06,0.7222,0.792,"[16, 18, 2, 26]",Local Isolation Only
+Initial Baseline (Siloed),Hospital 3 Standalone,"Non-IID (Hospital 3, 59.2% HD)",39,62,75.81,68.57,85.71,67.65,0.7619,0.8183,"[23, 11, 4, 24]",Local Isolation Only
+Initial Baseline (Siloed),Hospital 4 Standalone,"Non-IID (Hospital 4, 26.3% HD)",76,62,79.03,89.47,60.71,94.12,0.7234,0.8456,"[32, 2, 11, 17]",Local Isolation Only
+Initial Collaborative FL,FedAvg (McMahan et al.),Distributed Non-IID (4 Hospitals),241,62,74.19,71.43,71.43,76.47,0.7143,0.8298,"[26, 8, 8, 20]",Weights Shared (Zero Raw Data)
+Initial Collaborative FL,FedProx (mu=0.01),Distributed Non-IID (4 Hospitals),241,62,74.19,68.75,78.57,70.59,0.7333,0.8298,"[24, 10, 6, 22]",Weights Shared (Zero Raw Data)
+Initial Collaborative FL,FedAvg + DP (Differential Privacy),Distributed Non-IID (4 Hospitals),241,62,79.03,74.19,82.14,76.47,0.7797,0.8403,"[26, 8, 5, 23]","Local DP (Gaussian Noise, eps~86)"
+Current Benchmark (Centralized),Traditional Centralized 80:20 (HeartDiseaseMLP),Pooled Centralized (80:20 Split),242,61,83.61,78.12,89.29,78.79,0.8333,0.9102,"[26, 7, 3, 25]",None (Raw Data Centrally Pooled)

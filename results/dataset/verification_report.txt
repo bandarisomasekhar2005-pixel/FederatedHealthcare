@@ -1,0 +1,63 @@
+===========================================================================
+STEP 4: AUTOMATED 80:20 DATASET & FEDERATED LEAKAGE AUDIT
+===========================================================================
+
+[CHECK 1/7] File & Directory Existence Audit
+  [PASS] Raw Data File          : Found (18461 bytes)
+  [PASS] Global Train Split     : Found (44824 bytes)
+  [PASS] Global Test Split      : Found (11424 bytes)
+  [PASS] Train Indices File     : Found (1124 bytes)
+  [PASS] Test Indices File      : Found (295 bytes)
+  [PASS] Hospital 1 Train CSV   : Found (15516 bytes)
+  [PASS] Hospital 2 Train CSV   : Found (6188 bytes)
+  [PASS] Hospital 3 Train CSV   : Found (6717 bytes)
+  [PASS] Hospital 4 Train CSV   : Found (16474 bytes)
+
+[CHECK 2/7] Sample Count & Split Integrity Audit
+  - Total Samples  : 303
+  - Training Split : 242 (79.9%)
+  - Testing Split  : 61 (20.1%)
+  [PASS] Total samples match expected UCI Cleveland count (303).
+  - Hospital 1 Training: 84 samples
+  - Hospital 2 Training: 33 samples
+  - Hospital 3 Training: 36 samples
+  - Hospital 4 Training: 89 samples
+  - Sum of Hospital Training Samples: 242
+  [PASS] Sum of hospital training samples (242) == Global training samples (242)
+
+[CHECK 3/7] Zero-Leakage & Disjointness Audit
+  [PASS] Train/Test Index Intersection = EMPTY (Overlap: 0)
+  [PASS] Global train/test leakage check passed.
+  [PASS] No test samples are used for federated training.
+  [PASS] Test samples inside hospital training = 0
+  [PASS] Hospital overlap = 0 (strictly mutually disjoint)
+
+[CHECK 4/7] Schema & Missing Value Audit
+  [PASS] Train and Test schemas match (23 columns)
+  [PASS] Hospital 1: Schema aligned (23 columns)
+  [PASS] Hospital 2: Schema aligned (23 columns)
+  [PASS] Hospital 3: Schema aligned (23 columns)
+  [PASS] Hospital 4: Schema aligned (23 columns)
+  - Missing values in Global Train: 0
+  - Missing values in Global Test : 0
+  - Missing values in Hospitals   : 0
+  [PASS] Zero missing values detected across all splits.
+
+[CHECK 5/7] Statistical Non-IID Heterogeneity Validation
+  - Hospital 1: N=84 | Class 0: 20 ( 23.8%) | Class 1: 64 ( 76.2%) | KL Div: 0.1911
+  - Hospital 2: N=33 | Class 0: 17 ( 51.5%) | Class 1: 16 ( 48.5%) | KL Div: 0.0014
+  - Hospital 3: N=36 | Class 0: 15 ( 41.7%) | Class 1: 21 ( 58.3%) | KL Div: 0.0312
+  - Hospital 4: N=89 | Class 0: 79 ( 88.8%) | Class 1: 10 ( 11.2%) | KL Div: 0.2809
+
+  Chi-Square Test of Independence (Label vs. Hospital Client):
+    * Chi2 Statistic : 76.4415
+    * Degrees of Freedom: 3
+    * p-value       : 1.7787e-16
+  [PASS] p-value < 0.01: Statistically significant Non-IID label skew confirmed!
+
+[CHECK 6/7] Privacy & PII Compliance Audit
+  [PASS] Zero PII tokens identified. All records contain strictly anonymized clinical variables.
+
+[CHECK 7/7] Generating Verification Artifacts
+  [SAVED] Distribution summary saved to: client_distribution_summary.csv
+  [SAVED] Visual distribution chart saved to: client_distribution_plot.png

@@ -1,0 +1,17 @@
+{
+    "Accuracy": 0.8360655737704918,
+    "Sensitivity (Recall)": 0.8928571428571429,
+    "Specificity": 0.7878787878787878,
+    "Precision": 0.78125,
+    "F1-Score": 0.8333333333333334,
+    "ROC-AUC": 0.9101731601731602,
+    "TN": 26,
+    "FP": 7,
+    "FN": 3,
+    "TP": 25,
+    "test_loss": 0.4591,
+    "training_samples": 242,
+    "testing_samples": 61,
+    "random_state": 42,
+    "primary_model": "HeartDiseaseMLP (Centralized 80:20)"
+}

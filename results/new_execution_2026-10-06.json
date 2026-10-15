@@ -1,0 +1,8 @@
+{
+  "label": "New Execution Result",
+  "date": "2026-10-06",
+  "algorithm": "FedProx + Differential Privacy",
+  "note": "A fresh 20-round execution was run to generate and persist the model checkpoint used by the application. Its benchmark files were not used to overwrite the preserved reported experiment.",
+  "checkpoint": "models/fedprox_dp_best.pt",
+  "reported_metrics_preserved": true
+}

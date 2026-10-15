@@ -1,0 +1,40 @@
+{
+    "metadata": {
+        "dataset": "UCI Heart Disease (Cleveland)",
+        "total_samples": 303,
+        "train_samples": 242,
+        "test_samples": 61,
+        "split_ratio": "80:20 (Stratified)",
+        "random_state": 42,
+        "test_leakage_check": "PASSED (0 overlap)"
+    },
+    "primary_model_metrics": {
+        "Accuracy": 0.8360655737704918,
+        "Sensitivity (Recall)": 0.8928571428571429,
+        "Specificity": 0.7878787878787878,
+        "Precision": 0.78125,
+        "F1-Score": 0.8333333333333334,
+        "ROC-AUC": 0.9101731601731602,
+        "TN": 26,
+        "FP": 7,
+        "FN": 3,
+        "TP": 25,
+        "test_loss": 0.4591,
+        "training_samples": 242,
+        "testing_samples": 61,
+        "random_state": 42,
+        "primary_model": "HeartDiseaseMLP (Centralized 80:20)"
+    },
+    "secondary_traditional_models": {
+        "LogisticRegression": {
+            "Accuracy": 0.8689,
+            "F1": 0.8667,
+            "ROC_AUC": 0.9578
+        },
+        "RandomForest": {
+            "Accuracy": 0.8689,
+            "F1": 0.8621,
+            "ROC_AUC": 0.9302
+        }
+    }
+}
